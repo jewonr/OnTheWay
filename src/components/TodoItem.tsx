@@ -3,10 +3,13 @@ import styled, { css } from 'styled-components'
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { TodoState } from '../modules/todo';
 
 type TodoItemProps = {
-  text: string;
-  isDone: boolean;
+  todo: TodoState;
+  onToggle: (id: number) => void;
+  onRemove: (id: number) => void;
+  toggleSecButton: boolean;
 }
 
 const Container = styled.div`
@@ -16,6 +19,13 @@ const Container = styled.div`
   border-bottom: .5px solid black;
   margin-top: 20px;
   padding-bottom: 5px;
+  > * {
+    $:nth-child(2) {
+      $:active {
+        color: red;
+      }
+    }
+  }
 `
 
 const Text = styled.div<{ isDone: boolean }>`
@@ -23,11 +33,24 @@ const Text = styled.div<{ isDone: boolean }>`
   ${props => props.isDone && css`color: #E1E1E1; text-decoration: line-through`}
 `
 
-function TodoItem({ text, isDone }: TodoItemProps) {
+function TodoItem({ todo, onToggle, onRemove, toggleSecButton }: TodoItemProps) {
+  const handleRemove = () => {
+    onRemove(todo.id);
+  }
+
+  const handleToggle = () => {
+    onToggle(todo.id);
+  }
+
   return (
     <Container>
-      <Text isDone={isDone} >{text}</Text>
-      {isDone ? <CheckBoxIcon fontSize='large' htmlColor='#868686' /> : <CheckBoxOutlineBlankIcon fontSize='large' htmlColor='#868686' />}
+      <Text isDone={todo.done} >{todo.text}</Text>
+      {toggleSecButton ? 
+        <DeleteIcon fontSize='large' htmlColor='#868686' onClick={handleRemove} /> : 
+        todo.done ? 
+          <CheckBoxIcon fontSize='large' htmlColor='#868686' onClick={handleToggle} /> : 
+          <CheckBoxOutlineBlankIcon fontSize='large' htmlColor='#868686' onClick={handleToggle} /> 
+      }
     </Container>
   )
 }

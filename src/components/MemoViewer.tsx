@@ -24,6 +24,7 @@ function MemoViewer() {
   const [memo, setMemo] = useState('');
 
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    console.log(e.target.value);
     setMemo(e.target.value);
   }
 

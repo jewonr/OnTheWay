@@ -17,7 +17,6 @@ const Container = styled.div`
 
 function SecHeader({ titleText, buttonText }: SecHeaderProps) {
 
-
   return (
     <Container>
       <SecTitle text={titleText} />

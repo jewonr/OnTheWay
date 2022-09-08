@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react'
 import styled, { css } from 'styled-components'
 import MenuBar from '../components/MenuBar'
 
@@ -8,6 +7,7 @@ const Container = styled.div`
   left: 0;
   right: 0;
   width: 100%;
+  background-color: #F9F9F9;
 `
 
 function Header() {
