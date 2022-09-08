@@ -1,9 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
+import { MemoState } from '../modules/memo'
 
 type MemoItemType = {
-  text: string;
-  date: string;
+  memo: MemoState;
+  onClick: (id: number) => void;
 }
 
 const Container = styled.div`
@@ -20,29 +21,33 @@ const Container = styled.div`
 
 const Text = styled.div`
   font-size: 18px;
-  font-weight: 300;
-  color: #868686;
+  font-weight: 500;
+  color: #000000;
   background-color: #FFFFFF;
 `
 
 const Date = styled.div`
   font-size: 15px;
-  font-weight: 300;
+  font-weight: 500;
   color: #868686;
   background-color: #FFFFFF;
 `
 
-function MemoItem({ text, date }: MemoItemType) {
+function MemoItem({ memo, onClick }: MemoItemType) {
+  const handleClick = () => {
+    onClick(memo.id);
+  }
+
   return (
-    <Container>
+    <Container onClick={handleClick}>
       <Text>
-        {text}
+        {memo.text}
       </Text>
       <Date>
-        {date}
+        {memo.date}
       </Date>
     </Container>
   )
 }
 
-export default MemoItem
+export default MemoItem;

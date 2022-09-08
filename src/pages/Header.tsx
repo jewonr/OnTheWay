@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import MenuBar from '../components/MenuBar'
 
 const Container = styled.div`

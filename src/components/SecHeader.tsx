@@ -6,6 +6,7 @@ import SecTitle from './SecTitle'
 type SecHeaderProps = {
   titleText: string;
   buttonText: string;
+  pageName: string;
 }
 
 const Container = styled.div`
@@ -15,12 +16,12 @@ const Container = styled.div`
   align-items: center;
 `
 
-function SecHeader({ titleText, buttonText }: SecHeaderProps) {
+function SecHeader({ titleText, buttonText, pageName }: SecHeaderProps) {
 
   return (
     <Container>
       <SecTitle text={titleText} />
-      <SecButton text={buttonText} />
+      <SecButton text={buttonText} pageName={pageName} />
     </Container>
   )
 }

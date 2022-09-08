@@ -1,28 +1,43 @@
-const TOGGLE = 'secButton/TOGGLE' as const;
+const FEED_CLICK = 'secButton/FEED_CLICK' as const;
+const SCRAP_CLICK = 'secButton/SCRAP_CLICK' as const;
+const TODO_CLICK = 'secButton/TODO_CLICK' as const;
+const MEMO_CLICK = 'secButton/MEMO_CLICK' as const;
 
-export function toggleSecButton() {
+export function clickSecButton(pageName: string) {
   return ({
-    type: TOGGLE
+    type: eval(pageName+'_CLICK')
   });
 }
 
-type secButtonAction = ReturnType<typeof toggleSecButton>
+type SecButtonAction = ReturnType<typeof clickSecButton>
 
-type secButtonState = {
-  toggle: boolean
+type SecButtonState = {
+  feedClicked: boolean
+  scrapClicked: boolean
+  todoClicked: boolean
+  memoClicked: boolean
 }
 
-const initialState: secButtonState = {
-  toggle: false
+const initialState: SecButtonState = {
+  feedClicked: false,
+  scrapClicked: false,
+  todoClicked: false,
+  memoClicked: false
 }
 
 function secButton(
-  state: secButtonState = initialState,
-  action: secButtonAction
-): secButtonState {
+  state: SecButtonState = initialState,
+  action: SecButtonAction
+): SecButtonState {
   switch(action.type) {
-    case TOGGLE:
-      return { toggle: !state.toggle };
+    case FEED_CLICK:
+      return { ...state, feedClicked: !state.feedClicked };
+    case SCRAP_CLICK:
+      return { ...state, scrapClicked: !state.scrapClicked };
+    case TODO_CLICK:
+      return { ...state, todoClicked: !state.todoClicked };
+    case MEMO_CLICK:
+      return { ...state, memoClicked: !state.memoClicked };
     default:
       return state;
   }

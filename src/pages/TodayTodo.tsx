@@ -11,7 +11,7 @@ const Container = styled.div`
   padding: 20px;
   width: 100%;
   border-bottom: 1px solid #E1E1E1;
-  min-height: 447px;
+  min-height: 454.5px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -20,7 +20,7 @@ const Container = styled.div`
 const TopWrapper = styled.div``
 
 function TodayTodo() {
-  const toggle = useSelector((state: RootState) => state.secButton.toggle);
+  const clicked = useSelector((state: RootState) => state.secButton.todoClicked);
   const todos = useSelector((state: RootState) => state.todo);
 
   const num = todos.filter(todo => todo.done === false).length;
@@ -29,9 +29,9 @@ function TodayTodo() {
   return (
     <Container>
       <TopWrapper>
-        {toggle ? <SecHeader titleText='오늘 할 일' buttonText="완료" /> : <SecHeader titleText='오늘 할 일' buttonText="할 일 편집" />}
+        {clicked ? <SecHeader titleText='오늘 할 일' buttonText="완료" pageName="TODO" /> : <SecHeader titleText='오늘 할 일' buttonText="할 일 편집" pageName='TODO' />}
         <SubTitle text={buttonText} />
-        <TodoList toggleSecButton={toggle} />
+        <TodoList toggleSecButton={clicked} /> 
       </TopWrapper>
       <AddTodo />
     </Container>

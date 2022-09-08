@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import React from 'react'
 import SecHeader from '../components/SecHeader'
 import ItemList from '../components/ItemList'
-import SecButton from '../components/SecButton'
+import SecBottomButton from '../components/SecBottomButton'
 
 const Container = styled.div`
   padding: 20px;
@@ -20,10 +20,10 @@ const SecButtonContainer = styled.div`
 function TodayFeed() {
   return (
     <Container>
-      <SecHeader titleText='오늘의 피드' buttonText='카테고리 추가' />
+      <SecHeader titleText='오늘의 피드' buttonText='카테고리 추가' pageName='SCRAP' />
       <ItemList text='' />
       <SecButtonContainer>
-        <SecButton text="더보기" />
+        <SecBottomButton text='더보기' />
       </SecButtonContainer>
     </Container>
   )

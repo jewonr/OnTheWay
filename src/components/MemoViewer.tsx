@@ -1,5 +1,14 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import styled from 'styled-components'
+import { RootState } from '../modules'
+import { clickSecButton } from '../modules/secButton';
+import { newMemo } from '../modules/memo';
+
+type MemoViewerType = {
+  pageName: string;
+}
 
 const Container = styled.div`
   width: 100%;
@@ -20,17 +29,30 @@ const MemoInput = styled.textarea`
   background-color: #FFFFFF;
 `
 
-function MemoViewer() {
-  const [memo, setMemo] = useState('');
+function MemoViewer({ pageName }: MemoViewerType) {
+  const clicked = useSelector((state: RootState) => state.secButton.memoClicked);
+  const dispatch = useDispatch();
+  const [text, setText] = useState('');
 
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    console.log(e.target.value);
-    setMemo(e.target.value);
+    setText(e.target.value);
   }
+
+  const onBlur = () => {
+    
+  }
+
+  useEffect(() => {
+    if(clicked) {
+      setText('');
+      dispatch(clickSecButton(pageName));
+      dispatch(newMemo());
+    }
+  }, [clicked, dispatch, pageName]);
 
   return (
     <Container>
-      <MemoInput value={memo} placeholder='번뜩이는 아이디어를 써보세요...' onChange={onChange} />
+      <MemoInput value={text} placeholder='번뜩이는 아이디어를 써보세요...' onChange={onChange} onBlur={onBlur} />
     </Container>
   )
 }

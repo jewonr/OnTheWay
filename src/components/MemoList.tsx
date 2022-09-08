@@ -1,5 +1,9 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import styled from 'styled-components'
+import { RootState } from '../modules'
+import { clickMemo } from '../modules/memo'
 import MemoItem from './MemoItem'
 
 const Container = styled.div`
@@ -18,12 +22,18 @@ const Container = styled.div`
 `
 
 function MemoList() {
+  const memos = useSelector((state: RootState) => state.memo);
+  const dispatch  = useDispatch();
+
+  const onClick = (id: number) => {
+    dispatch(clickMemo(id))
+  }
+
   return (
     <Container>
-      <MemoItem text='hello' date='08-31' />
-      <MemoItem text='hello' date='08-31' />
-      <MemoItem text='hello' date='08-31' />
-      <MemoItem text='hello' date='08-31' />
+      {memos.map(memo => (
+        <MemoItem memo={memo} onClick={onClick} key={memo.id} />
+      ))}
     </Container>
   )
 }
