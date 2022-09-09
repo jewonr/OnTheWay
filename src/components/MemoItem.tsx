@@ -22,7 +22,7 @@ const Container = styled.div`
 const Text = styled.div`
   font-size: 18px;
   font-weight: 500;
-  color: #000000;
+  color: #868686;
   background-color: #FFFFFF;
 `
 
@@ -41,7 +41,7 @@ function MemoItem({ memo, onClick }: MemoItemType) {
   return (
     <Container onClick={handleClick}>
       <Text>
-        {memo.text}
+        {memo.text === '' ? '새로운 메모' : memo.text.length > 10 ? memo.text.slice(0, 10) + '...' : memo.text}
       </Text>
       <Date>
         {memo.date}

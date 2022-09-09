@@ -58,7 +58,7 @@ function memo(
       state.map(memo => memo.view = false);
       return state.concat({
         id: action.payload,
-        text: '새로운 메모',
+        text: '',
         view: true,
         date
       });

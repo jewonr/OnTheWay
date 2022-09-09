@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { RootState } from '../modules'
 import { clickSecButton } from '../modules/secButton';
-import { newMemo } from '../modules/memo';
+import { addMemo, newMemo } from '../modules/memo';
 
 type MemoViewerType = {
   pageName: string;
@@ -24,35 +24,55 @@ const MemoInput = styled.textarea`
   border: none;
   border-radius: 10px;
   font-size: 18px;
-  font-weight: 300;
+  font-weight: 500;
   resize: none;
   background-color: #FFFFFF;
+  color: #868686;
+
+  &::placeholder {
+    color: #E1E1E1;
+    font-weight: 300;
+  }
 `
 
 function MemoViewer({ pageName }: MemoViewerType) {
   const clicked = useSelector((state: RootState) => state.secButton.memoClicked);
+  const memos = useSelector((state: RootState) => state.memo);
   const dispatch = useDispatch();
   const [text, setText] = useState('');
-
-  const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setText(e.target.value);
-  }
-
-  const onBlur = () => {
-    
-  }
+  const memoInput = useRef<HTMLTextAreaElement>(null);
+  const id = useRef(0);
 
   useEffect(() => {
     if(clicked) {
       setText('');
       dispatch(clickSecButton(pageName));
       dispatch(newMemo());
+      memoInput.current?.focus();
     }
   }, [clicked, dispatch, pageName]);
 
+  useEffect(() => {
+   for (const memo of memos) {
+    if(memo.view) {
+      id.current = memo.id;
+      setText(memo.text);
+      break;
+    }
+   }
+  }, [memos]);
+
+  const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setText(e.target.value);
+  }
+
+  const onBlur = () => {
+    dispatch(addMemo(id.current, text));
+  }
+
   return (
     <Container>
-      <MemoInput value={text} placeholder='번뜩이는 아이디어를 써보세요...' onChange={onChange} onBlur={onBlur} />
+      <MemoInput value={text} placeholder='번뜩이는 아이디어를 써보세요...' onChange={onChange} onBlur={onBlur} ref={memoInput} />
     </Container>
   )
 }
