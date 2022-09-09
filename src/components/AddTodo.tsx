@@ -17,6 +17,11 @@ const TodoInput = styled.input`
   height: 50px;
   width: 100%;
   background-color: #FFFFFF;
+
+  &::placeholder {
+    color: #E1E1E1;
+    font-weight: 300;
+  }
 `
 
 function AddTodo() {

@@ -24,10 +24,9 @@ const MemoInput = styled.textarea`
   border: none;
   border-radius: 10px;
   font-size: 18px;
-  font-weight: 500;
+  font-weight: 300;
   resize: none;
   background-color: #FFFFFF;
-  color: #868686;
 
   &::placeholder {
     color: #E1E1E1;
