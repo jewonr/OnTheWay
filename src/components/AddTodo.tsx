@@ -11,7 +11,6 @@ const Container = styled.form`
 const TodoInput = styled.input`
   padding: 10px;
   font-size: 18px;
-  font-weight: 300;
   border: .5px solid #E1E1E1;
   border-radius: 5px;
   height: 50px;

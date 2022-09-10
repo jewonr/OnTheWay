@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled, { css } from 'styled-components'
 import CheckBoxIcon from '@mui/icons-material/CheckBox';
 import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
@@ -19,13 +19,6 @@ const Container = styled.div`
   border-bottom: .5px solid black;
   margin-top: 20px;
   padding-bottom: 5px;
-  > * {
-    $:nth-child(2) {
-      $:active {
-        color: red;
-      }
-    }
-  }
 `
 
 const Text = styled.div<{ isDone: boolean }>`
