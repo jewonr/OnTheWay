@@ -54,7 +54,6 @@ function MemoViewer({ pageName }: MemoViewerType) {
     if(memo.view) {
       id.current = memo.id;
       setText(memo.text);
-      memoInput.current?.focus();
       break;
     }
    }
