@@ -8,7 +8,6 @@ const Container = styled.div`
   padding: 20px;
   width: 100%;
   border-bottom: 1px solid #E1E1E1;
-  margin-top: 76px;
 `
 
 const SecButtonContainer = styled.div`
