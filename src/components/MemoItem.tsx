@@ -16,6 +16,7 @@ const Container = styled.div`
   align-items: center;
   border-collapse: collapse;
   background-color: #FFFFFF;
+  cursor: pointer;
 `
 
 const Text = styled.div`
