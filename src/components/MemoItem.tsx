@@ -14,7 +14,6 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: .5px solid #E1E1E1;
   border-collapse: collapse;
   background-color: #FFFFFF;
 `

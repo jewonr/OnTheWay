@@ -11,13 +11,18 @@ const Container = styled.div<{ length: number }>`
   width: 100%;
   border-collapse: collapse;
   > * {
+    border: .5px solid #E1E1E1;
+
     &:first-child {
       border-radius: 5px 5px 0 0;
-      border: .5px solid #E1E1E1;
     }
 
     &:last-child {
       border-radius: 0 0 5px 5px;
+    }
+
+    &:first-child, last-child {
+      border-radius: 5px;
     }
   }
 `

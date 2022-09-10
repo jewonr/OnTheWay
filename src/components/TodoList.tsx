@@ -1,10 +1,9 @@
 import React from 'react'
 import styled from 'styled-components';
-import todo from '../modules/todo';
 import TodoItem from './TodoItem'
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../modules';
-import { addTodo, removeTodo, toggleTodo } from '../modules/todo';
+import { removeTodo, toggleTodo } from '../modules/todo';
 
 type TodoListType = {
   toggleSecButton: boolean;

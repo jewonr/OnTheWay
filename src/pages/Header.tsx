@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import styled from 'styled-components'
 import MenuBar from '../components/MenuBar'
+import SideMenu from '../components/SideMenu'
 
 const Container = styled.div`
   position: fixed;
@@ -11,9 +13,20 @@ const Container = styled.div`
 `
 
 function Header() {
+  const [visible, setVisible] = useState(false);
+
+  const onClick = () => {
+    setVisible(true);
+  }
+
+  const onClose = () => {
+    setVisible(false);
+  }
+
   return (
     <Container>
-      <MenuBar />
+      <SideMenu visible={visible} onClose={onClose} />
+      <MenuBar onClick={onClick} />
     </Container>
   )
 }

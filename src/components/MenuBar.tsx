@@ -3,6 +3,10 @@ import styled from 'styled-components'
 import MenuIcon from '@mui/icons-material/Menu';
 import PersonIcon from '@mui/icons-material/Person';
 
+type MenuBarType = {
+  onClick: () => void;
+}
+
 const Container = styled.div`
   width: 100%;
   height: 76px;
@@ -18,15 +22,13 @@ const Title = styled.div`
   font-weight: 700;
 `
 
-function MenuBar() {
+function MenuBar({ onClick }: MenuBarType) {
   return (
-    <>
-      <Container>
-        <MenuIcon fontSize='large' />
-        <Title>OnTheWay.</Title>
-        <PersonIcon fontSize='large' />
-      </Container>
-    </>
+    <Container>
+      <MenuIcon fontSize='large' onClick={onClick} />
+      <Title>OnTheWay.</Title>
+      <PersonIcon fontSize='large' />
+    </Container>
   )
 }
 
