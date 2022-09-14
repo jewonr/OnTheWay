@@ -1,3 +1,5 @@
+import { updateTodos } from "../api/todoApi";
+
 const ADD_TODO = 'todo/ADD_TODO' as const;
 const REMOVE_TODO = 'todo/REMOVE_TODO' as const;
 const TOGGLE_TODO = 'todo/TOGGLE_TODO' as const;
@@ -43,20 +45,24 @@ function todo(
 ) {
   switch(action.type) {
     case ADD_TODO:
-      return state.concat({
+      state = state.concat({
         id: action.payload.id,
         text: action.payload.text,
         done: false
       });
+      break;
     case REMOVE_TODO:
-      return state.filter(todo => todo.id !== action.payload);
+      state = state.filter(todo => todo.id !== action.payload);
+      break;
     case TOGGLE_TODO:
-      return state.map(todo => 
+      state = state.map(todo => 
         todo.id === action.payload ? { ...todo, done: !todo.done } : todo
       );
+      break;
     default:
       return state;
   }
+  return state;
 }
 
 export default todo;

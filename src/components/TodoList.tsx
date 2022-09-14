@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import TodoItem from './TodoItem'
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../modules';
-import { removeTodo, toggleTodo } from '../modules/todo';
+import { removeTodo, TodosState, toggleTodo } from '../modules/todo';
 
 type TodoListType = {
   toggleSecButton: boolean;
@@ -18,7 +18,7 @@ const Container = styled.div`
 `
 
 function TodoList({ toggleSecButton }: TodoListType) {
-  const todos = useSelector((state: RootState) => state.todo);
+  const todos: TodosState = useSelector((state: RootState) => state.todo);
   const dispatch = useDispatch();
 
   const onToggle = (id: number) => {

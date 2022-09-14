@@ -32,7 +32,7 @@ type MemoAction =
   | ReturnType<typeof newMemo>
   | ReturnType<typeof addMemo>
   | ReturnType<typeof clickMemo>
-  | ReturnType<typeof removeMemo>
+  | ReturnType<typeof removeMemo>;
 
 export type MemoState = {
   id: number;

@@ -6,6 +6,7 @@ import SubTitle from '../components/SubTitle';
 import TodoList from '../components/TodoList';
 import { RootState } from '../modules';
 import { useSelector } from 'react-redux';
+import { TodosState } from '../modules/todo';
 
 const Container = styled.div`
   padding: 20px;
@@ -21,7 +22,7 @@ const TopWrapper = styled.div``
 
 function TodayTodo() {
   const clicked = useSelector((state: RootState) => state.secButton.todoClicked);
-  const todos = useSelector((state: RootState) => state.todo);
+  const todos: TodosState = useSelector((state: RootState) => state.todo);
 
   const num = todos.filter(todo => todo.done === false).length;
   const buttonText = num === 0 ? '할 일을 추가해보세요...' : `할 일 ${num}개 남음` ;

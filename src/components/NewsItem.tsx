@@ -7,16 +7,17 @@ const Container = styled.div<{ width: number }>`
   border-radius: 25px;
   background-color: #FFFFFF;
   box-shadow: 0 0 15px rgba(149, 157, 165, 25%);
+  margin-top: 20px;
 `
 
-function Item() {
+function NewsItem() {
   const viewWidth: number = window.innerWidth;
   const itemWidth: number = (viewWidth - 70) / 2;
   return (
     <Container width={itemWidth}>
-      {}
+      
     </Container>
   )
 }
 
-export default Item
+export default NewsItem;

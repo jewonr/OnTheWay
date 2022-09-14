@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import MenuIcon from '@mui/icons-material/Menu';
 import PersonIcon from '@mui/icons-material/Person';
+import { Link } from 'react-router-dom';
 
 type MenuBarType = {
   onClick: () => void;
@@ -20,13 +21,18 @@ const Container = styled.div`
 const Title = styled.div`
   font-size: 30px;
   font-weight: 700;
+
+  > * {
+    text-decoration: none;
+    color: #000000;
+  }
 `
 
 function MenuBar({ onClick }: MenuBarType) {
   return (
     <Container>
       <MenuIcon fontSize='large' onClick={onClick} />
-      <Title>OnTheWay.</Title>
+      <Title><Link to="/">OnTheWay.</Link></Title>
       <PersonIcon fontSize='large' />
     </Container>
   )

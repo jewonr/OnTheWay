@@ -6,6 +6,7 @@ import TodayTodo from './pages/TodayTodo';
 import Memo from './pages/Memo';
 import { Route, Routes } from 'react-router-dom';
 import styled from 'styled-components';
+import Footer from './pages/Footer';
 
 const Box = styled.div`
   width 100%;
@@ -24,6 +25,7 @@ function App() {
         <Route path='/todo' element={<TodayTodo />} />
         <Route path='/memo' element={<Memo />} />
       </Routes>
+      <Footer />
     </>
   );
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import Item from './Item'
+import NewsItem from './NewsItem'
 import SubTitle from './SubTitle'
 
 type ItemListProps = {
@@ -8,34 +8,33 @@ type ItemListProps = {
 }
 
 const Container = styled.div`
-  margin: 20px 0;
+  margin-bottom: 20px;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  flex-wrap: wrap;
 `
 
-const Row = styled.div`
+const ItemWrapper = styled.div`
   width: 100%;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
-  margin-top: 20px;
 `
 
-function ItemList({ text }: ItemListProps) {
+function NewsItemList({ text }: ItemListProps) {
   return (
     <Container>
       <SubTitle text={text} />
-      <Row>
-        <Item />
-        <Item />
-      </Row>
-      <Row>
-        <Item />
-        <Item />
-      </Row>
+      <ItemWrapper>
+        <NewsItem />
+        <NewsItem />
+        <NewsItem />
+        <NewsItem />
+      </ItemWrapper>
     </Container>
   )
 }
 
-export default ItemList
+export default NewsItemList;
