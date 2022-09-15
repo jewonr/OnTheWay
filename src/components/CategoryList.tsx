@@ -10,7 +10,7 @@ const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
-  gap: 20px;
+  gap: 15px;
 `
 
 function CategoryList() {

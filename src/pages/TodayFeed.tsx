@@ -26,7 +26,6 @@ function TodayFeed() {
     <>
       <Container>
         <SecHeader titleText='오늘의 피드' buttonText={clicked ? '완료' : '카테고리 추가'} pageName='FEED' />
-        <CategoryList />
         <NewsItemList text='' />
         <SecButtonContainer>
           <SecBottomButton text='더보기' pageName='feed' />
