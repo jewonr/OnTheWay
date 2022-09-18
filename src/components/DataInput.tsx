@@ -58,6 +58,7 @@ const setActionAndPlaceholder = (pageName: string): ActionAndPlaceholder => {
 
 function DataInput({ pageName, visible }: AddDataType) {
   const [data, setData] = useState('');
+  const [added, setAdded] = useState(false);
   const dispatch = useDispatch();
   const input = useRef<HTMLInputElement>(null);
   const { action, placeholder }: ActionAndPlaceholder = setActionAndPlaceholder(pageName);
