@@ -15,6 +15,7 @@ type AddCategoryType = {
 const Container = styled.div`
   border-top: 1px solid #E1E1E1;
   width: 100%;
+  height: 100vh;
   padding: 20px;
   transition: .5s;
   background: #F9F9F9;
