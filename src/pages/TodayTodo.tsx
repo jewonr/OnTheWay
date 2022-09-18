@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import AddTodo from '../components/AddTodo';
+import DataInput from '../components/DataInput';
 import SecHeader from '../components/SecHeader'
 import SubTitle from '../components/SubTitle';
 import TodoList from '../components/TodoList';
@@ -34,7 +34,7 @@ function TodayTodo() {
         <SubTitle text={buttonText} />
         <TodoList toggleSecButton={clicked} /> 
       </TopWrapper>
-      <AddTodo />
+      <DataInput pageName='TODO' />
     </Container>
   );
 }

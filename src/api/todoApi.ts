@@ -5,8 +5,7 @@ import { TodosState } from "../modules/todo";
 const URL = 'http://localhost:8000/api';
 
 export const getTodos = async () => {
-  const res = await axios.get(`${URL}/get/todo`);
-  return res;
+  return await axios.get(`${URL}/get/todo`);
 }
 
 export const updateTodos = async (todos: TodosState) => {
@@ -14,8 +13,7 @@ export const updateTodos = async (todos: TodosState) => {
 }
 
 export const getMemos = async () => {
-  const res = await axios.get(`${URL}/get/memo`);
-  return res;
+  return await axios.get(`${URL}/get/memo`);
 }
 
 export const updateMemos = async (memos: MemosState) => {

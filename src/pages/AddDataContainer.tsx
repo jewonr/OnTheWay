@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
-import AddCategory from '../components/AddCategory'
+import DataInput from '../components/AddData'
 import { RootState } from '../modules'
 import { useDispatch } from 'react-redux'
 import { clickSecButton } from '../modules/secButton'
@@ -17,21 +17,16 @@ const Container = styled.div<{ visible: boolean }>`
   transition: .5s;
 `
 
+function AddDataContainer() {
+  const clickedPage = useSelector((state: RootState) => state.secButton);
 
-
-function Footer() {
-  const feedClicked = useSelector((state: RootState) => state.secButton.feedClicked);
-  const dispatch = useDispatch();
-
-  const onClose = () => {
-    dispatch(clickSecButton('FEED'));
-  }
+  const visible = clickedPage.feedClicked || clickedPage.scrapClicked || clickedPage.memoClicked;
 
   return (
-    <Container visible={feedClicked} >
-      <AddCategory visible={feedClicked} onClose={onClose} />
+    <Container visible={visible} >
+      <DataInput clickedPage={clickedPage} visible={visible} />
     </Container>
   )
 }
 
-export default Footer;
+export default AddDataContainer;

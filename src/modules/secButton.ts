@@ -11,7 +11,7 @@ export function clickSecButton(pageName: string) {
 
 type SecButtonAction = ReturnType<typeof clickSecButton>
 
-type SecButtonState = {
+export type SecButtonState = {
   feedClicked: boolean
   scrapClicked: boolean
   todoClicked: boolean

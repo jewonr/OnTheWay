@@ -1,5 +1,3 @@
-import { updateTodos } from "../api/todoApi";
-
 const ADD_TODO = 'todo/ADD_TODO' as const;
 const REMOVE_TODO = 'todo/REMOVE_TODO' as const;
 const TOGGLE_TODO = 'todo/TOGGLE_TODO' as const;

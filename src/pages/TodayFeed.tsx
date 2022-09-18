@@ -3,9 +3,6 @@ import styled from 'styled-components'
 import SecHeader from '../components/SecHeader'
 import NewsItemList from '../components/NewsItemList'
 import SecBottomButton from '../components/SecBottomButton'
-import CategoryList from '../components/CategoryList'
-import { useSelector } from 'react-redux'
-import { RootState } from '../modules'
 
 const Container = styled.div`
   padding: 20px;
@@ -20,18 +17,14 @@ const SecButtonContainer = styled.div`
 `
 
 function TodayFeed() {
-  const clicked = useSelector((state: RootState) => state.secButton.feedClicked);
-
   return (
-    <>
-      <Container>
-        <SecHeader titleText='오늘의 피드' buttonText={clicked ? '완료' : '카테고리 추가'} pageName='FEED' />
-        <NewsItemList text='' />
-        <SecButtonContainer>
-          <SecBottomButton text='더보기' pageName='feed' />
-        </SecButtonContainer>
-      </Container>
-    </>
+    <Container>
+      <SecHeader titleText='오늘의 피드' buttonText='카테고리 추가' pageName='FEED' />
+      <NewsItemList text='' />
+      <SecButtonContainer>
+        <SecBottomButton text='더보기' pageName='feed' />
+      </SecButtonContainer>
+    </Container>
   )
 }
 

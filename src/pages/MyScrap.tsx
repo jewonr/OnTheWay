@@ -1,5 +1,5 @@
-import styled from 'styled-components'
 import React from 'react'
+import styled from 'styled-components'
 import SecHeader from '../components/SecHeader'
 import NewsItemList from '../components/NewsItemList'
 import SecBottomButton from '../components/SecBottomButton'
