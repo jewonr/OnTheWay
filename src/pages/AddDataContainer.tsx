@@ -12,6 +12,7 @@ const Container = styled.div<{ visible: boolean }>`
   left: 0;
   right: 0;
   width: 100%;
+  height: 100vh;
   display: flex;
   align-items: flex-end;
   transition: .5s;
