@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Header from './pages/Header';
 import TodayFeed from './pages/TodayFeed';
 import MyScrap from './pages/MyScrap';
@@ -19,7 +19,7 @@ function App() {
       <Header />
       <Box />
       <Routes>
-        <Route path='/*' element={<><TodayFeed /><MyScrap /><TodayTodo /><Memo /></>} />
+        <Route path='/*' element={<><TodayFeed /><TodayTodo /><Memo /></>} />
         <Route path='/feed' element={<TodayFeed />} />
         <Route path='/scrap' element={<MyScrap />} />
         <Route path='/todo' element={<TodayTodo />} />

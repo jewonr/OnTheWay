@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import DataInput from '../components/DataInput';
 import SecHeader from '../components/SecHeader'
@@ -22,9 +22,8 @@ const TopWrapper = styled.div``
 
 function TodayTodo() {
   const clicked = useSelector((state: RootState) => state.secButton.todoClicked);
-  const todos: TodosState = useSelector((state: RootState) => state.todo);
 
-  const num = todos.filter(todo => todo.done === false).length;
+  const [num, setNum] = useState<Number>();
   const buttonText = num === 0 ? '할 일을 추가해보세요...' : `할 일 ${num}개 남음` ;
 
   return (
@@ -32,9 +31,9 @@ function TodayTodo() {
       <TopWrapper>
         {clicked ? <SecHeader titleText='오늘 할 일' buttonText="완료" pageName="TODO" /> : <SecHeader titleText='오늘 할 일' buttonText="할 일 편집" pageName='TODO' />}
         <SubTitle text={buttonText} />
-        <TodoList toggleSecButton={clicked} /> 
+        <TodoList toggleSecButton={clicked} setNum={setNum} /> 
       </TopWrapper>
-      <DataInput pageName='TODO' />
+      <DataInput pageName='TODO' setInitialAdd={() => ''} />
     </Container>
   );
 }

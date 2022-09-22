@@ -1,12 +1,10 @@
 const ADD_CATEGORY = 'category/ADD_CATEGORY' as const;
 const REMOVE_CATEGORY = 'category/REMOVE_CATEGORY' as const;
 
-let nextId = 1;
-
 export const addCategory = (text: string) => ({
   type: ADD_CATEGORY,
   payload: {
-    id: nextId++,
+    id: Math.ceil(new Date().getTime() + Math.random()),
     text
   }
 });
@@ -16,7 +14,7 @@ export const removeCategory = (id: number) => ({
   payload: id
 });
 
-type CategoryAction = 
+export type CategoryAction = 
   | ReturnType<typeof addCategory>
   | ReturnType<typeof removeCategory>;
 
@@ -35,6 +33,8 @@ function category(
 ): CategoriesState {
   switch(action.type) {
     case ADD_CATEGORY:
+      const text = action.payload.text.replace(/\s/g, "");
+      if(text === '') return state;
       state = state.concat({
         id: action.payload.id,
         text: action.payload.text,

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import SecHeader from '../components/SecHeader'
 import MemoViewer from '../components/MemoViewer'
@@ -18,11 +18,12 @@ const SecButtonContainer = styled.div`
 `
 
 function Memo() {
+  const [rendered, setRendered] = useState('');
   return (
     <Container>
       <SecHeader titleText='메모' buttonText='새로운 메모' pageName='MEMO' />
       <MemoViewer pageName='MEMO' />
-      <MemoList />
+      <MemoList setRendered={setRendered} />
       <SecButtonContainer>
         <SecBottomButton text='더보기' pageName='memo' />
       </SecButtonContainer>

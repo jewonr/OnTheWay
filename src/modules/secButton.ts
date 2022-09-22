@@ -9,7 +9,7 @@ export function clickSecButton(pageName: string) {
   });
 }
 
-type SecButtonAction = ReturnType<typeof clickSecButton>
+export type SecButtonAction = ReturnType<typeof clickSecButton>
 
 export type SecButtonState = {
   feedClicked: boolean

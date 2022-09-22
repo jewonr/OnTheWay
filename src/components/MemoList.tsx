@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { RootState } from '../modules'
-import { clickMemo } from '../modules/memo'
+import { clickMemo, MemosState } from '../modules/memo'
 import MemoItem from './MemoItem'
+
+type MemoListType = {
+  setRendered: ($: string) => void;
+}
 
 const Container = styled.div<{ length: number }>`
   margin: 20px 0;
@@ -27,13 +31,18 @@ const Container = styled.div<{ length: number }>`
   }
 `
 
-function MemoList() {
-  const memos = useSelector((state: RootState) => state.memo);
+function MemoList({ setRendered }: MemoListType) {
+  const memos: MemosState = useSelector((state: RootState) => state.memo);
   const dispatch  = useDispatch();
-
+  
   const onClick = (id: number) => {
     dispatch(clickMemo(id))
   }
+
+  useEffect(() => {
+    console.log(memos.length);
+    setRendered('memo rendered');
+  }, []);
 
   return (
     <Container length={memos.length} >
@@ -44,4 +53,4 @@ function MemoList() {
   )
 }
 
-export default MemoList
+export default MemoList;

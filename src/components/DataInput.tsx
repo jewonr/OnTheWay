@@ -3,11 +3,11 @@ import styled from 'styled-components'
 import { useDispatch } from 'react-redux'
 import { addTodo } from '../modules/todo'
 import { addCategory } from '../modules/category'
-import { addMemo } from '../modules/memo'
 
 type AddDataType = {
   pageName: string;
   visible?: boolean;
+  setInitialAdd: ($: boolean) => void;
 }
 
 const Container = styled.form`
@@ -56,9 +56,8 @@ const setActionAndPlaceholder = (pageName: string): ActionAndPlaceholder => {
   }
 }
 
-function DataInput({ pageName, visible }: AddDataType) {
+function DataInput({ pageName, visible, setInitialAdd }: AddDataType) {
   const [data, setData] = useState('');
-  const [added, setAdded] = useState(false);
   const dispatch = useDispatch();
   const input = useRef<HTMLInputElement>(null);
   const { action, placeholder }: ActionAndPlaceholder = setActionAndPlaceholder(pageName);
@@ -75,6 +74,7 @@ function DataInput({ pageName, visible }: AddDataType) {
     e.preventDefault();
     dispatch(action(data));
     setData('');
+    setInitialAdd(true);
   }
 
   return (

@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import CloseIcon from '@mui/icons-material/Close';
 import CategoryList from './CategoryList';
 import DataInput from './DataInput';
 import { clickSecButton, SecButtonState } from '../modules/secButton';
 import { useDispatch } from 'react-redux';
-import { addCategory } from '../modules/category';
+import { updateFeeds } from '../api/feedApi';
 
 type AddCategoryType = {
   clickedPage: SecButtonState;
@@ -57,7 +57,7 @@ const Close = styled.div`
   right: 20px;
 `
 
-const SubmitButton = styled.button`
+const SubmitButton = styled.button<{ visible: boolean }>`
   width: 100%;
   padding: 10px;
   font-size: 15px;
@@ -67,6 +67,8 @@ const SubmitButton = styled.button`
   border: none;
   border-radius: 5px;
   font-weight: 700;
+  visibility: ${props => props.visible ? 'visible' : 'hidden'};
+  transition: .5s;
 `
 
 interface pageNameAndHeaderTitle {
@@ -76,6 +78,7 @@ interface pageNameAndHeaderTitle {
 
 function AddData({ clickedPage, visible }: AddCategoryType) {
   const dispatch = useDispatch();
+  const [initialAdd, setInitialAdd] = useState(false);
   const { pageName, headerTitle }: pageNameAndHeaderTitle = 
     clickedPage.feedClicked ? { pageName: 'FEED', headerTitle: '카테고리' } :
     clickedPage.scrapClicked ? { pageName: 'SCRAP', headerTitle: '스크랩' } :
@@ -89,6 +92,10 @@ function AddData({ clickedPage, visible }: AddCategoryType) {
     dispatch(clickSecButton(pageName));
   }
 
+  useEffect(() => {
+    setInitialAdd(false);
+  } ,[]);
+
   return (
     <Container>
       <Header>
@@ -98,11 +105,11 @@ function AddData({ clickedPage, visible }: AddCategoryType) {
         </Close>
       </Header>
       <Body>
-        <CategoryList />
-        <DataInput pageName={pageName} visible={visible} />  
+        {clickedPage.feedClicked && <CategoryList />}
+        <DataInput pageName={pageName} visible={visible} setInitialAdd={setInitialAdd} />  
       </Body>
       <Footer>
-        <SubmitButton onClick={onClickSubmitButton}>저장</SubmitButton>
+        <SubmitButton onClick={onClickSubmitButton} visible={initialAdd} >저장</SubmitButton>
       </Footer>
     </Container>
   )

@@ -59,6 +59,10 @@ function MemoViewer({ pageName }: MemoViewerType) {
    }
   }, [memos]);
 
+  useEffect(() => {
+    setText('');
+  }, []);
+
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setText(e.target.value);
   }

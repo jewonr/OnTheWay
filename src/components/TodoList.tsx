@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components';
 import TodoItem from './TodoItem'
 import { useSelector, useDispatch } from 'react-redux';
@@ -7,6 +7,7 @@ import { removeTodo, TodosState, toggleTodo } from '../modules/todo';
 
 type TodoListType = {
   toggleSecButton: boolean;
+  setNum: ($: number) => void;
 }
 
 const Container = styled.div`
@@ -17,7 +18,7 @@ const Container = styled.div`
   justify-content: flex-start;
 `
 
-function TodoList({ toggleSecButton }: TodoListType) {
+function TodoList({ toggleSecButton, setNum }: TodoListType) {
   const todos: TodosState = useSelector((state: RootState) => state.todo);
   const dispatch = useDispatch();
 
@@ -28,6 +29,11 @@ function TodoList({ toggleSecButton }: TodoListType) {
   const onRemove = (id: number) => {
     dispatch(removeTodo(id));
   }
+
+  useEffect(() => {
+    console.log(todos.length);
+    setNum(todos.filter(todo => todo.done === false).length);
+  } ,[todos]);
 
   return (
     <Container>

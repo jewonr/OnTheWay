@@ -1,13 +1,13 @@
+import { getTodos, updateTodos } from "../api/todoApi";
+
 const ADD_TODO = 'todo/ADD_TODO' as const;
 const REMOVE_TODO = 'todo/REMOVE_TODO' as const;
 const TOGGLE_TODO = 'todo/TOGGLE_TODO' as const;
 
-let nextId = 1;
-
 export const addTodo = (text: string) => ({
   type: ADD_TODO,
   payload: {
-    id: nextId++,
+    id: Math.ceil(new Date().getTime() + Math.random()),
     text
   }
 });
@@ -22,7 +22,7 @@ export const toggleTodo = (id: number) => ({
   payload: id
 });
 
-type TodoAction =
+export type TodoAction =
   | ReturnType<typeof addTodo>
   | ReturnType<typeof removeTodo>
   | ReturnType<typeof toggleTodo>
@@ -36,6 +36,12 @@ export type TodoState = {
 export type TodosState = TodoState[];
 
 const initialState: TodosState = [];
+(async () => {
+  await getTodos()
+    .then(todos => todos.forEach((todo: TodoState) => {
+      initialState.push(todo);
+    }));
+})();
 
 function todo(
   state: TodosState = initialState,
@@ -43,6 +49,8 @@ function todo(
 ) {
   switch(action.type) {
     case ADD_TODO:
+      const text = action.payload.text.replace(/\s/g, "");
+      if(text === '') return state;
       state = state.concat({
         id: action.payload.id,
         text: action.payload.text,
@@ -60,6 +68,7 @@ function todo(
     default:
       return state;
   }
+  updateTodos(state);
   return state;
 }
 

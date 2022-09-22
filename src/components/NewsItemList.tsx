@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
+import { Content, getFeeds } from '../api/feedApi'
 import NewsItem from './NewsItem'
 import SubTitle from './SubTitle'
 
@@ -24,15 +25,31 @@ const ItemWrapper = styled.div`
 `
 
 function NewsItemList({ text }: ItemListProps) {
+  const [feeds, setFeeds] = useState([]);
+  let nextId = 0;
+  
+  useEffect(() => {
+    (async () => {
+      setFeeds(await getFeeds());
+    })();
+  }, []);
+
+
   return (
     <Container>
       <SubTitle text={text} />
-      <ItemWrapper>
-        <NewsItem />
-        <NewsItem />
-        <NewsItem />
-        <NewsItem />
-      </ItemWrapper>
+      <>
+        {feeds.forEach((feed: Content[], idx: number) => {
+          <ItemWrapper key={idx}>
+              <>
+                <NewsItem category={feed[idx].category} />
+                {feed.forEach(item => {
+                  <NewsItem feed={item} key={nextId++} />
+                })}
+              </>
+          </ItemWrapper>
+        })}
+      </>
     </Container>
   )
 }

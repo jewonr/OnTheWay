@@ -5,11 +5,21 @@ import memo from "./memo";
 import category from "./category";
 
 const rootReducer = combineReducers({
+  category,
+  memo,
   secButton,
   todo,
-  memo,
-  category
 });
+
+export const initialState = {
+  category: [{ id: 1, text: 'test' }],
+  secButton: {
+    feedClicked: false,
+    scrapClicked: false,
+    todoClicked: false,
+    memoClicked: false
+  },
+};
 
 export default rootReducer;
 

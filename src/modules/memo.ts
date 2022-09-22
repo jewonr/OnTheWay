@@ -1,13 +1,13 @@
+import { getMemos, updateMemos } from "../api/memoApi";
+
 const NEW_MEMO = 'memo/NEW_MEMO' as const;
 const ADD_MEMO = 'memo/ADD_MEMO' as const;
 const CLICK_MEMO = 'memo/CLICK_MEMO' as const;
 const REMOVE_MEMO = 'memo/REMOVE_MEMO' as const;
 
-let nextId = 1;
-
 export const newMemo = () => ({
   type: NEW_MEMO,
-  payload: nextId++
+  payload: Math.ceil(new Date().getTime() + Math.random())
 });
 
 export const addMemo = (id: number, text: string) => ({
@@ -28,7 +28,7 @@ export const removeMemo = (id: number) => ({
   payload: id
 })
 
-type MemoAction = 
+export type MemoAction = 
   | ReturnType<typeof newMemo>
   | ReturnType<typeof addMemo>
   | ReturnType<typeof clickMemo>
@@ -44,6 +44,12 @@ export type MemoState = {
 export type MemosState = MemoState[];
 
 const initialState: MemosState = [];
+(async () => {
+  await getMemos()
+    .then(memos => memos.forEach((memo: MemoState) => {
+      initialState.push(memo);
+    }));
+})();
 
 function memo(
   state: MemosState = initialState,
@@ -56,28 +62,34 @@ function memo(
   switch(action.type) {
     case NEW_MEMO:
       state.map(memo => memo.view = false);
-      return state.concat({
+      state = state.concat({
         id: action.payload,
         text: '',
         view: true,
         date
       });
+      break;
     case ADD_MEMO:
-      return state.map(memo => 
-          memo.id === action.payload.id ? { ...memo, text: action.payload.text, date } : memo
+      state = state.map(memo => 
+          memo.id === action.payload.id ?  { ...memo, text: action.payload.text, date } : memo 
       );
+      state = state.filter(memo => memo.text !== '');
+      break;
     case CLICK_MEMO:
-      return state.map(memo => 
+      state =  state.map(memo => 
         memo.view ? 
           { ...memo, view: !memo.view } : 
-          memo.id === action.payload ? { ...memo, view: !memo.view  } : 
-          memo
+          memo.id === action.payload ? { ...memo, view: !memo.view  } : memo
       );
+      break;
     case REMOVE_MEMO:
-      return state.filter(memo => memo.id !== action.payload);
+      state = state.filter(memo => memo.id !== action.payload);
+      break;
     default:
       return state;
   }
+  updateMemos(state);
+  return state;
 }
 
 export default memo;
