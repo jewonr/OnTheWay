@@ -3,16 +3,19 @@ import secButton from "./secButton";
 import todo from "./todo";
 import memo from "./memo";
 import category from "./category";
+import data from "./data/reducer";
+import scrap from "./scrap/reducer";
 
 const rootReducer = combineReducers({
   category,
   memo,
   secButton,
   todo,
+  data,
+  scrap
 });
 
 export const initialState = {
-  category: [{ id: 1, text: 'test' }],
   secButton: {
     feedClicked: false,
     scrapClicked: false,

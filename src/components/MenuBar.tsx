@@ -19,12 +19,12 @@ const Container = styled.div`
 `
 
 const Title = styled.div`
-  font-size: 30px;
-  font-weight: 700;
-
   > * {
     text-decoration: none;
     color: #000000;
+    font-size: 35px;
+    font-weight: 800;
+    font-family: 'Vollkorn';
   }
 `
 

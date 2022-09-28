@@ -1,5 +1,9 @@
+import { deleteCategory, getCategory, insertCategory } from "../api/categoryApi";
+import { updateFeeds } from "../api/feedApi";
+
 const ADD_CATEGORY = 'category/ADD_CATEGORY' as const;
 const REMOVE_CATEGORY = 'category/REMOVE_CATEGORY' as const;
+const SAVE_CATEGORY = 'category/SAVE_CATEGORY' as const;
 
 export const addCategory = (text: string) => ({
   type: ADD_CATEGORY,
@@ -9,14 +13,19 @@ export const addCategory = (text: string) => ({
   }
 });
 
-export const removeCategory = (id: number) => ({
+export const removeCategory = (text: string) => ({
   type: REMOVE_CATEGORY,
-  payload: id
+  payload: text
+});
+
+export const saveCategory = () => ({
+  type: SAVE_CATEGORY,
 });
 
 export type CategoryAction = 
   | ReturnType<typeof addCategory>
-  | ReturnType<typeof removeCategory>;
+  | ReturnType<typeof removeCategory>
+  | ReturnType<typeof saveCategory>;
 
 export type CategoryState = {
   id: number;
@@ -26,6 +35,12 @@ export type CategoryState = {
 export type CategoriesState = CategoryState[];
 
 const initialState: CategoriesState = [];
+(async () => {
+  await getCategory()
+    .then(categories => categories.forEach((category: CategoryState) => {
+      initialState.push(category);
+    }));
+})();
 
 function category(
   state: CategoriesState = initialState,
@@ -39,9 +54,16 @@ function category(
         id: action.payload.id,
         text: action.payload.text,
       });
+      insertCategory(action.payload);
       break;
     case REMOVE_CATEGORY:
-      state = state.filter(category => category.id !== action.payload);
+      state = state.filter(category => category.text !== action.payload);
+      deleteCategory(action.payload);
+      break;
+    case SAVE_CATEGORY:
+      state.forEach(category => {
+        updateFeeds(category);
+      })
       break;
     default:
       return state;

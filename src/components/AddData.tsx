@@ -5,7 +5,8 @@ import CategoryList from './CategoryList';
 import DataInput from './DataInput';
 import { clickSecButton, SecButtonState } from '../modules/secButton';
 import { useDispatch } from 'react-redux';
-import { updateFeeds } from '../api/feedApi';
+import { saveCategory } from '../modules/category';
+import { getDataThunk } from '../modules/data';
 
 type AddCategoryType = {
   clickedPage: SecButtonState;
@@ -77,7 +78,7 @@ interface pageNameAndHeaderTitle {
 }
 
 function AddData({ clickedPage, visible }: AddCategoryType) {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<any>();
   const [initialAdd, setInitialAdd] = useState(false);
   const { pageName, headerTitle }: pageNameAndHeaderTitle = 
     clickedPage.feedClicked ? { pageName: 'FEED', headerTitle: '카테고리' } :
@@ -89,23 +90,27 @@ function AddData({ clickedPage, visible }: AddCategoryType) {
   }
 
   const onClickSubmitButton = () => {
+    if(pageName === 'FEED') {
+      dispatch(saveCategory());
+      dispatch(getDataThunk());
+    } else {}
     dispatch(clickSecButton(pageName));
   }
 
   useEffect(() => {
     setInitialAdd(false);
-  } ,[]);
+  }, []);
 
   return (
     <Container>
       <Header>
-        <HeaderText>{headerTitle} 추가</HeaderText>
+        <HeaderText>{headerTitle} 편집</HeaderText>
         <Close>
           <CloseIcon fontSize='large' htmlColor='#868686' onClick={onClose} />
         </Close>
       </Header>
       <Body>
-        {clickedPage.feedClicked && <CategoryList />}
+        {clickedPage.feedClicked && <CategoryList setInitialAdd={setInitialAdd} />}
         <DataInput pageName={pageName} visible={visible} setInitialAdd={setInitialAdd} />  
       </Body>
       <Footer>

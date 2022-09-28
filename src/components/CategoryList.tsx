@@ -6,6 +6,10 @@ import { RootState } from '../modules';
 import { removeCategory } from '../modules/category';
 import Category from './Category';
 
+type CategoryListType = {
+  setInitialAdd: ($: boolean) => void;
+}
+
 const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -13,12 +17,12 @@ const Container = styled.div`
   gap: 15px;
 `
 
-function CategoryList() {
+function CategoryList({ setInitialAdd }: CategoryListType) {
   const categories = useSelector((state: RootState) => state.category);
   const dispatch = useDispatch();
 
-  const onRemove = (id: number) => {
-    dispatch(removeCategory(id));
+  const onRemove = (text: string) => {
+    dispatch(removeCategory(text));
   }
 
   return (
@@ -28,6 +32,7 @@ function CategoryList() {
           category={category}
           onRemove={onRemove}
           key={category.id}
+          setInitialAdd={setInitialAdd}
         />
       ))}
     </Container>

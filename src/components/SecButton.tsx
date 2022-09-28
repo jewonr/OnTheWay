@@ -1,5 +1,5 @@
-import styled from 'styled-components'
 import React from 'react'
+import styled from 'styled-components'
 import { useDispatch } from 'react-redux';
 import { clickSecButton } from '../modules/secButton';
 
@@ -20,8 +20,8 @@ const Button = styled.button`
 function SecButton({ text, pageName }: SecButtonProps) {
   const dispatch = useDispatch();
 
-  const onToggle = () => {
-    dispatch(clickSecButton(pageName));
+  const onToggle = () => {  
+    if(pageName !== 'SCRAP') dispatch(clickSecButton(pageName));
   }
 
   return (
@@ -29,4 +29,4 @@ function SecButton({ text, pageName }: SecButtonProps) {
   )
 }
 
-export default SecButton
+export default SecButton;

@@ -7,7 +7,7 @@ type MemoItemType = {
   onClick: (id: number) => void;
 }
 
-const Container = styled.div`
+const Container = styled.div<{ view: boolean }>`
   width: 100%;
   height: 50px;
   padding: 15px;
@@ -23,14 +23,12 @@ const Text = styled.div`
   font-size: 18px;
   font-weight: 500;
   color: #868686;
-  background-color: #FFFFFF;
 `
 
 const Date = styled.div`
   font-size: 15px;
   font-weight: 500;
   color: #868686;
-  background-color: #FFFFFF;
 `
 
 function MemoItem({ memo, onClick }: MemoItemType) {
@@ -39,7 +37,7 @@ function MemoItem({ memo, onClick }: MemoItemType) {
   }
 
   return (
-    <Container onClick={handleClick}>
+    <Container onClick={handleClick} view={memo.view} >
       <Text>
         {memo.text === '' ? '새로운 메모' : memo.text.length > 10 ? memo.text.slice(0, 10) + '...' : memo.text}
       </Text>

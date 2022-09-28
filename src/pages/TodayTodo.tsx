@@ -6,7 +6,6 @@ import SubTitle from '../components/SubTitle';
 import TodoList from '../components/TodoList';
 import { RootState } from '../modules';
 import { useSelector } from 'react-redux';
-import { TodosState } from '../modules/todo';
 
 const Container = styled.div`
   padding: 20px;

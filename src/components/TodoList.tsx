@@ -31,7 +31,6 @@ function TodoList({ toggleSecButton, setNum }: TodoListType) {
   }
 
   useEffect(() => {
-    console.log(todos.length);
     setNum(todos.filter(todo => todo.done === false).length);
   } ,[todos]);
 

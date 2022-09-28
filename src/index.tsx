@@ -4,12 +4,12 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
-import { legacy_createStore as createStore } from "redux";
+import { applyMiddleware, legacy_createStore as createStore } from "redux";
 import { BrowserRouter } from 'react-router-dom';
 import rootReducer, { initialState } from './modules';
+import Thunk from 'redux-thunk';
 
-const store = createStore(rootReducer, initialState);
-console.log(store.getState());
+const store = createStore(rootReducer, initialState, applyMiddleware(Thunk));
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

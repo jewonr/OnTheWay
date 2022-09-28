@@ -25,9 +25,7 @@ const Container = styled.div<{ length: number }>`
       border-radius: 0 0 5px 5px;
     }
 
-    &:first-child, last-child {
-      border-radius: 5px;
-    }
+    border-radius: ${props => props.length === 1 ? '5px' : ''}
   }
 `
 
@@ -40,7 +38,6 @@ function MemoList({ setRendered }: MemoListType) {
   }
 
   useEffect(() => {
-    console.log(memos.length);
     setRendered('memo rendered');
   }, []);
 

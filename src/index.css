@@ -1,10 +1,35 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Vollkorn:wght@400;500;600;700;800;900&display=swap');
+@font-face {
+  font-family: 'Neo Thin';
+  src: url('./fonts/SpoqaHanSansNeo-Thin.ttf');
+}
+
+@font-face {
+  font-family: 'Neo Light';
+  src: url('./fonts/SpoqaHanSansNeo-Light.ttf');
+}
+
+@font-face {
+  font-family: 'Neo Medium';
+  src: url('./fonts/SpoqaHanSansNeo-Medium.ttf');
+}
+
+@font-face {
+  font-family: 'Neo Regular';
+  src: url('./fonts/SpoqaHanSansNeo-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Neo Bold';
+  src: url('./fonts/SpoqaHanSansNeo-Bold.ttf');
+}
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Neo Medium', 'Inter', sans-serif;
 }
 
 #root {

@@ -6,8 +6,8 @@ type SecTitleProps = {
 }
 
 const Container = styled.div`
+  font-family: "Neo Bold";
   font-size: 25px;
-  font-weight: 800;
 `
 
 function SecTitle({ text }: SecTitleProps) {

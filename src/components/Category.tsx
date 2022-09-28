@@ -5,7 +5,8 @@ import { CategoryState } from '../modules/category';
 
 type CategoryType = {
   category: CategoryState;
-  onRemove: (id: number) => void;
+  onRemove: (text: string) => void;
+  setInitialAdd: ($: boolean) => void;
 }
 
 const Container = styled.div`
@@ -26,10 +27,11 @@ const Text = styled.div`
   margin-right: 5px;
 `
 
-function Category({ category, onRemove }: CategoryType) {
+function Category({ category, onRemove, setInitialAdd }: CategoryType) {
 
   const handleRemove = () => {
-    onRemove(category.id);
+    setInitialAdd(true);
+    onRemove(category.text);
   }
 
   return (

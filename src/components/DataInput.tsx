@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import { useDispatch } from 'react-redux'
 import { addTodo } from '../modules/todo'
 import { addCategory } from '../modules/category'
+import { getDataThunk } from '../modules/data/thunks'
+import { addScrap } from '../api/scrapApi'
 
 type AddDataType = {
   pageName: string;
@@ -39,7 +41,7 @@ const Text = styled.div`
 `
 
 interface ActionAndPlaceholder {
-  action: (text: string) => any,
+  action: (text: string) => any
   placeholder: string
 }
 
@@ -48,17 +50,17 @@ const setActionAndPlaceholder = (pageName: string): ActionAndPlaceholder => {
     case 'FEED':
       return { action: addCategory, placeholder: "관심있는 카테고리를 저장해보세요..." }
     case 'SCRAP':
-      return { action: addTodo, placeholder: "관심있는 기사나 블로그를 저장해보세요..." }
+      return { action: addTodo, placeholder: "링크 입력 ..." }
     case 'TODO':
       return { action: addTodo, placeholder: "할 일을 추가해보세요..." }
     default:
-      return { action: addCategory, placeholder: "관심있는 카테고리를 저장해보세요..." }
+      return { action: addCategory, placeholder: "" }
   }
 }
 
 function DataInput({ pageName, visible, setInitialAdd }: AddDataType) {
   const [data, setData] = useState('');
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<any>();
   const input = useRef<HTMLInputElement>(null);
   const { action, placeholder }: ActionAndPlaceholder = setActionAndPlaceholder(pageName);
 
@@ -72,7 +74,8 @@ function DataInput({ pageName, visible, setInitialAdd }: AddDataType) {
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(action(data));
+    if(pageName !== 'SCRAP') dispatch(action(data));
+    else if(pageName === 'SCRAP') addScrap(data);
     setData('');
     setInitialAdd(true);
   }
@@ -80,7 +83,8 @@ function DataInput({ pageName, visible, setInitialAdd }: AddDataType) {
   return (
     <Container onSubmit={onSubmit}>
       <Input value={data} placeholder={placeholder} onChange={onChange} ref={input} />
-      {pageName === 'FEED' && <Text>ex) #경제, #사회 ...</Text>}
+      {pageName === 'FEED' && <Text>ex) 경제, 사회 ...</Text>}
+      {pageName === 'SCRAP' && <Text>관심있는 기사나 블로그를 저장해보세요...</Text>}
     </Container>
   )
 }
