@@ -19,7 +19,6 @@ export interface Scrap {
 export const getScrap = async () => {
   try {
     const data = (await axios.get(`${URL}/get/scrap`)).data;
-    console.log('asdfasdf');
     return data;
   } catch (e) {
     console.error(e);

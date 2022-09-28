@@ -28,6 +28,7 @@ const ImgWrapper = styled.div`
   flex: 2;
   width: 100%;
   min-height: 60%;
+  object-fit: cover;
 `
 
 const Img = styled.img`

@@ -7,7 +7,6 @@ import Memo from './pages/Memo';
 import { Route, Routes } from 'react-router-dom';
 import styled from 'styled-components';
 import AddDataContainer from './pages/AddDataContainer';
-import axios from 'axios';
 
 const Box = styled.div`
   width 100%;
@@ -15,11 +14,6 @@ const Box = styled.div`
 `
 
 function App() {
-  useEffect(() => {
-    (async () => {
-      await axios.get('http://localhost:8000/api/get/scrap').then(data => console.log(data));
-    })();
-  })
   return (
     <>
       <Header />
