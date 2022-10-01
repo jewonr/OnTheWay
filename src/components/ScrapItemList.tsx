@@ -27,7 +27,7 @@ const ItemWrapper = styled.div`
 function ScrapItemList() {
   const { data, loading, error } = useSelector((state: RootState) => state.scrap.content)
   const dispatch = useDispatch<any>();
-  const [max, setMax] = useState(3);
+  const [max, setMax] = useState(5);
 
   useEffect(() => {
     async function getScrap() {
@@ -44,7 +44,7 @@ function ScrapItemList() {
         <Container>
           <ItemWrapper>
             <ScrapItem plusButton={true} />
-            {data.map((scrap: Scrap) => (
+            {data.slice(0, max).map((scrap: Scrap) => (
               <ScrapItem plusButton={false} scrap={scrap} key={scrap.id} />
             ))}
           </ItemWrapper>  

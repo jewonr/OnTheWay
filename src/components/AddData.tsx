@@ -92,6 +92,7 @@ function AddData({ clickedPage, visible }: AddCategoryType) {
   const onClickSubmitButton = () => {
     if(pageName === 'FEED') {
       dispatch(saveCategory());
+      setTimeout(() => console.log('waiting...'), 1000);
       dispatch(getDataThunk());
     } else {}
     dispatch(clickSecButton(pageName));

@@ -32,7 +32,7 @@ function MyScrap() {
     <Container>
       <TopWrapper>
         <SecHeader titleText='나의 스크랩' buttonText='스크랩 편집' pageName='SCRAP' />
-        {!data.data?.length ? <SubTitle text='카테고리를 추가해 보세요...' /> : <></>}
+        {!data.data?.length ? <SubTitle text='새로운 스크랩을 추가해보세요...' /> : <></>}
       </TopWrapper>
       <ScrapItemList />
       <SecButtonContainer>
