@@ -14,7 +14,6 @@ type AddCategoryType = {
 }
 
 const Container = styled.div`
-  border-top: 1px solid #E1E1E1;
   width: 100%;
   height: 100vh;
   padding: 20px;
@@ -92,7 +91,6 @@ function AddData({ clickedPage, visible }: AddCategoryType) {
   const onClickSubmitButton = () => {
     if(pageName === 'FEED') {
       dispatch(saveCategory());
-      setTimeout(() => console.log('waiting...'), 1000);
       dispatch(getDataThunk());
     } else {}
     dispatch(clickSecButton(pageName));

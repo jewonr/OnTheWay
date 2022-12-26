@@ -7,6 +7,10 @@ import { RootState } from '../modules'
 import { getScrapThunk } from '../modules/scrap'
 import ScrapItem from './ScrapItem'
 
+type ScrapItemListType = {
+  max: number;
+}
+
 const Container = styled.div`
   margin-bottom: 20px;
   width: 100%;
@@ -24,10 +28,9 @@ const ItemWrapper = styled.div`
   margin-bottom: 20px;
 `
 
-function ScrapItemList() {
+function ScrapItemList({ max }: ScrapItemListType) {
   const { data, loading, error } = useSelector((state: RootState) => state.scrap.content)
   const dispatch = useDispatch<any>();
-  const [max, setMax] = useState(5);
 
   useEffect(() => {
     async function getScrap() {

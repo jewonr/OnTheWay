@@ -8,7 +8,7 @@ import { getDataThunk } from '../modules/data/thunks'
 import LinkItem from './LinkItem'
 
 type LinkItemListProps = {
-  text: string;
+  max: number;
 }
 
 const Container = styled.div`
@@ -28,10 +28,9 @@ const ItemWrapper = styled.div`
   margin-bottom: 20px;
 `
 
-function LinkItemList({ text }: LinkItemListProps) {
+function LinkItemList({ max }: LinkItemListProps) {
   const { data, loading, error } = useSelector((state: RootState) => state.data.content)
   const dispatch = useDispatch<any>();
-  const [max, setMax] = useState(3);
 
   let nextId = 0;
 

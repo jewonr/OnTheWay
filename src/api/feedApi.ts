@@ -14,7 +14,10 @@ export interface Content {
 export const getSearchResult = async (category: string) => {
   let content: Content[] = [];
   try {
-    const res = await axios.get(`https://www.googleapis.com/customsearch/v1?key=AIzaSyCDsd-pO3-wb2GE-ZmVjxErTp1TKUhAHUk&cx=33916d969f65c47b0&q=${category}`);
+    const searchStartIndex = await axios.get(`${URL}/get/searchidx`);
+    console.log(searchStartIndex.data);
+    const res = await axios.get(`https://www.googleapis.com/customsearch/v1?key=AIzaSyCDsd-pO3-wb2GE-ZmVjxErTp1TKUhAHUk&cx=33916d969f65c47b0&num=9&q=${category}start=${searchStartIndex.data.num}`);
+    console.log(res);
     res.data.items.map((item: any) => {
       content.push({
         title: item.title,

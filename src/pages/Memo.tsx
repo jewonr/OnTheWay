@@ -25,7 +25,7 @@ function Memo() {
       <MemoViewer pageName='MEMO' />
       <MemoList setRendered={setRendered} />
       <SecButtonContainer>
-        <SecBottomButton text='더보기' pageName='memo' />
+        <SecBottomButton pageName='memo' />
       </SecButtonContainer>
     </Container>
   )

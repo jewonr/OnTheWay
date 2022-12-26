@@ -14,9 +14,18 @@ const Container = styled.div`
 
 function Header() {
   const [visible, setVisible] = useState(false);
+  const [visibleProfile, setVisibleProfile] = useState(false);
 
   const onClick = () => {
     setVisible(true);
+  }
+
+  const onClickProfile = () => {
+    setVisibleProfile(true);
+  }
+
+  const onBlur = () => {
+    setVisibleProfile(false);
   }
 
   const onClose = () => {
@@ -26,7 +35,7 @@ function Header() {
   return (
     <Container>
       <SideMenu visible={visible} onClose={onClose} />
-      <MenuBar onClick={onClick} />
+      <MenuBar onClick={onClick} onClickProfile={onClickProfile} visibleProfile={visibleProfile} onBlur={onBlur} />
     </Container>
   )
 }

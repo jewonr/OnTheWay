@@ -21,7 +21,7 @@ const Container = styled.form`
 `
 
 const Input = styled.input`
-  padding: 10px;
+  padding: 0 20px;
   font-size: 18px;
   border: .5px solid #E1E1E1;
   border-radius: 5px;

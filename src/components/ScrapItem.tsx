@@ -65,7 +65,7 @@ const ButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #868686;
+  color: #E1E1E1;
 `
 
 function ScrapItem({ plusButton, scrap }: ScrapItemType) {
